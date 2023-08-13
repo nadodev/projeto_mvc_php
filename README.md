@@ -4,14 +4,16 @@ Features:
 - Cadastro de Usuarios
 - Listagem de Usuarios
 - Cadastro de Vagas
-- Listagem e Aplicação para a vagas
+- Listagem das vagas
 
   
 ## Em breve
 - Busca de Vagas
 - Login
 - DashBoard
-- 
+- Aplicação para a vagas
+
+  
 ## Estrutura
 Nesse projeto foi usado uma estrutura MVC
 - coffeecode/router  - Para as Rotas
