@@ -64,4 +64,24 @@ class Model {
         }
     }
 
+    public function findById($tabela, $id)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM $tabela WHERE id = $id LIMIT 1");
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function buscarVagaPorId(string $tabela, int $idVaga) {
+        $query = "SELECT * FROM $tabela WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id', $idVaga, PDO::PARAM_INT);
+    
+        try {
+            $stmt->execute();
+            $vaga = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $vaga; // Retorna os dados da vaga ou null se não encontrada
+        } catch (\PDOException $e) {
+            throw new RuntimeException("Error while fetching data: " . $e->getMessage());
+        }
+    }
+    
 }
