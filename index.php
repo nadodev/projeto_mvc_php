@@ -25,9 +25,6 @@ $router->group(null);
 
 $router->get("/", "Web:home");
 
-
-
-
 /**
 * Rota: / (contato)
 * Controller: Contato
@@ -42,6 +39,16 @@ $router->get("/contato",  "Contato:contact");
 */
 $router->get("/usuarios",  "UserController:listAllUsers");
 $router->post("/usuarios/store",  "UserController:store");
+
+
+/**
+* Rota: / (Vagas)
+* Controller: VagasController
+* Método: listAllVagas 
+*/
+$router->get("/vagas",  "VagasController:listAllVagas");
+$router->get("/vagas/detalhes/{id}",  "VagasController:detalhesVagas");
+
 
 /**
 *  Group Error
