@@ -1,23 +1,26 @@
 <?php
 
-
 namespace Source\App\Core;
 
 use PDO;
 use PDOException;
+use Dotenv\Dotenv;
 
 class Conexao {
-    private $host = "localhost";
-    private $dbname = "usuarios";
-    private $usuario = "root";
-    private $senha = "";
-
-    private $port = "3306";
     private $conexao;
 
     public function __construct() {
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/../../../'); // Ajuste o caminho para a raiz do projeto
+        $dotenv->load();
+
+        $host = $_ENV['DB_HOST'];
+        $port = $_ENV['DB_PORT'];
+        $dbname = $_ENV['DB_DATABASE'];
+        $usuario = $_ENV['DB_USERNAME'];
+        $senha = $_ENV['DB_PASSWORD'];
+
         try {
-            $this->conexao = new PDO("mysql:host=$this->host;port=$this->port;dbname=$this->dbname", $this->usuario, $this->senha);
+            $this->conexao = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $usuario, $senha);
             $this->conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             throw new \ErrorException("Erro na conexão: " . $e->getMessage());
@@ -32,6 +35,4 @@ class Conexao {
         $this->conexao = null;
     }
 }
-
-
 ?>
